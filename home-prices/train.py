@@ -4,7 +4,8 @@ import csv
 def main():
     # Read data
     with open('train.csv') as fh:
-        labels_reader = csv.reader(fh)
+        #labels_reader = csv.reader(fh)
+        labels_reader = csv.DictReader(fh)
 
         for row in labels_reader:
             print(row)
