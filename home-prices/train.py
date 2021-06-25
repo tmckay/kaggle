@@ -8,12 +8,14 @@ def main():
         labels_reader = csv.DictReader(fh)
 
         for row in labels_reader:
-            print(row.keys())
+            keys = row.keys()
+            print(f'Number of potential features: {len(keys)}')
+            print(keys)
             numeric = []
             for k,v in row.items():
                 if v.isnumeric():
                     numeric.append(k)
-            print('Numeric')
+            print(f'Number of numeric features: {len(numeric)}')
             print(numeric)
             break
 
