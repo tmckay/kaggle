@@ -1,5 +1,8 @@
 import csv
 
+import numpy as np
+from sklearn import datasets, linear_model
+
 
 def main():
     # Read data
@@ -7,17 +10,20 @@ def main():
         #labels_reader = csv.reader(fh)
         labels_reader = csv.DictReader(fh)
 
+        X_feats = []
+        Y_labels = []
+
         for row in labels_reader:
-            keys = row.keys()
-            print(f'Number of potential features: {len(keys)}')
-            print(keys)
-            numeric = []
-            for k,v in row.items():
-                if v.isnumeric():
-                    numeric.append(k)
-            print(f'Number of numeric features: {len(numeric)}')
-            print(numeric)
-            break
+            X_feats.append(int(row['YearBuilt']))
+            Y_labels.append(row['SalePrice'])
+
+        regr = linear_model.LinearRegression()
+        regr.fit(np.array(X_feats).reshape(-1, 1), np.array(Y_labels).reshape(-1, 1))
+
+        pred_year = [[1995]]
+        pred_sale_price = int(regr.predict(pred_year)[0][0])
+        print(f'For a home built in {pred_year[0][0]}, we predict a price of ${pred_sale_price:,}')
+
 
 if __name__ == '__main__':
     main()
