@@ -14,15 +14,15 @@ def main():
         Y_labels = []
 
         for row in labels_reader:
-            X_feats.append(int(row['YearBuilt']))
+            X_feats.append([int(row['YearBuilt']), int(row['LotArea'])])
             Y_labels.append(row['SalePrice'])
 
         regr = linear_model.LinearRegression()
-        regr.fit(np.array(X_feats).reshape(-1, 1), np.array(Y_labels).reshape(-1, 1))
+        regr.fit(np.array(X_feats), np.array(Y_labels).reshape(-1, 1))
 
-        pred_year = [[1995]]
+        pred_year = [[1995, 7500]]
         pred_sale_price = int(regr.predict(pred_year)[0][0])
-        print(f'For a home built in {pred_year[0][0]}, we predict a price of ${pred_sale_price:,}')
+        print(f'For a home built in {pred_year[0]}, we predict a price of ${pred_sale_price:,}')
 
 
 if __name__ == '__main__':
