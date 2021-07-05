@@ -8,7 +8,7 @@ from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error
 
 def main():
 
-    features = ('YearBuilt', 'LotArea', '1stFlrSF', '2ndFlrSF', 'YearRemodAdd', 'OverallQual', 'OverallCond', 'SalePrice')
+    features = ('YearBuilt', 'LotArea', '1stFlrSF', '2ndFlrSF', 'YearRemodAdd', 'OverallQual', 'OverallCond', 'TotalBsmtSF', 'SalePrice')
 
     # Read data
     with open('train.csv') as fh:
