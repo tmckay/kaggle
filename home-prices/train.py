@@ -3,7 +3,7 @@ import random
 
 import numpy as np
 from sklearn import datasets, linear_model
-from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error
+from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error, median_absolute_error
 
 
 def main():
@@ -51,6 +51,9 @@ def main():
 
         mape = mean_absolute_percentage_error(test_predictions, Y_labels_test) * 100
         print(f'Mean absolute percentage error {mape:.2f}%')
+
+        mae = median_absolute_error(test_predictions, Y_labels_test)
+        print(f'Median absolute error {mae}')
 
 
 if __name__ == '__main__':
