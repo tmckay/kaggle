@@ -3,7 +3,12 @@ import random
 
 import numpy as np
 from sklearn import datasets, linear_model
-from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error, median_absolute_error
+from sklearn.metrics import (
+    mean_squared_error,
+    mean_absolute_percentage_error,
+    median_absolute_error,
+    r2_score
+)
 
 
 def main():
@@ -54,6 +59,9 @@ def main():
 
         mae = median_absolute_error(test_predictions, Y_labels_test)
         print(f'Median absolute error {mae}')
+
+        r2 = r2_score(test_predictions, Y_labels_test)
+        print(f'R2 {r2:.4f}')
 
 
 if __name__ == '__main__':
