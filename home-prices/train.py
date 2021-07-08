@@ -7,7 +7,8 @@ from sklearn.metrics import (
     mean_squared_error,
     mean_absolute_percentage_error,
     median_absolute_error,
-    r2_score
+    r2_score,
+    max_error
 )
 
 
@@ -62,6 +63,9 @@ def main():
 
         r2 = r2_score(test_predictions, Y_labels_test)
         print(f'R2 {r2:.4f}')
+
+        max_error_amt = max_error(test_predictions, Y_labels_test) 
+        print(f'Max error {max_error_amt}')
 
 
 if __name__ == '__main__':
