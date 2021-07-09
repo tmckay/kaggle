@@ -1,3 +1,4 @@
+import argparse
 import csv
 import random
 
@@ -11,13 +12,38 @@ from sklearn.metrics import (
     max_error
 )
 
+_CONFIG = {
+    'FEATURES_FILE': 'train.csv', 
+}
+
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--show-features', action='store_true')
+    args = parser.parse_args()
+
+    if args.show_features:
+        show_features() 
+    else:
+        train()
+
+
+def show_features():
+    with open(_CONFIG['FEATURES_FILE']) as fh: 
+        labels_reader = csv.DictReader(fh)
+
+        for row in labels_reader:
+            for col, val in row.items():
+                print(f'{col}: {val}') 
+            break  # just show one row
+
+
+def train():
 
     features = ('YearBuilt', 'LotArea', '1stFlrSF', '2ndFlrSF', 'YearRemodAdd', 'OverallQual', 'OverallCond', 'TotalBsmtSF', 'SalePrice')
 
     # Read data
-    with open('train.csv') as fh:
+    with open(_CONFIG['FEATURES_FILE']) as fh:
         labels_reader = csv.DictReader(fh)
         
         all_features = []
