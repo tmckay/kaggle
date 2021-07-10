@@ -79,19 +79,13 @@ def train():
 
         test_predictions = regr.predict(X_feats_test)
         mse = mean_squared_error(test_predictions, Y_labels_test)
-        print(f'Mean squared error is {mse}')
-
         mape = mean_absolute_percentage_error(test_predictions, Y_labels_test) * 100
-        print(f'Mean absolute percentage error {mape:.2f}%')
-
         mae = median_absolute_error(test_predictions, Y_labels_test)
-        print(f'Median absolute error {mae}')
-
         r2 = r2_score(test_predictions, Y_labels_test)
-        print(f'R2 {r2:.4f}')
-
         max_error_amt = max_error(test_predictions, Y_labels_test) 
-        print(f'Max error {max_error_amt}')
+
+        print(f'MSE {mse} : MAPE {mape:.2f}% : MAE {mae} : R2 {r2:.4f} : Max error {max_error_amt}')
+        print()
 
 
 if __name__ == '__main__':
