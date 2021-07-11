@@ -38,6 +38,12 @@ def show_features():
             break  # just show one row
 
 
+def pe20(preds, labels):
+    diff = np.abs(preds - labels) 
+    error = diff / preds
+    return np.count_nonzero(error < .20) / np.count_nonzero(error)
+
+
 def train():
 
     features = ('YearBuilt', 'LotArea', '1stFlrSF', '2ndFlrSF', 'YearRemodAdd', 'OverallQual', 'OverallCond', 'TotalBsmtSF', 'SalePrice')
@@ -83,8 +89,9 @@ def train():
         mae = median_absolute_error(test_predictions, Y_labels_test)
         r2 = r2_score(test_predictions, Y_labels_test)
         max_error_amt = max_error(test_predictions, Y_labels_test) 
+        pe_20 = pe20(test_predictions, Y_labels_test)
 
-        print(f'MSE {mse} : MAPE {mape:.2f}% : MAE {mae} : R2 {r2:.4f} : Max error {max_error_amt}')
+        print(f'MSE {mse} : MAPE {mape:.2f}% : MAE {mae} : R2 {r2:.4f} : Max error {max_error_amt} : PE20 {pe_20:.3f}')
         print()
 
 
