@@ -65,7 +65,7 @@ def train():
 
         included_features = features[:idx]
 
-        print(included_features)
+        print('|'.join(included_features))
 
         for row in all_features:
             X_feats.append(
@@ -91,7 +91,7 @@ def train():
         max_error_amt = max_error(test_predictions, Y_labels_test) 
         pe_20 = pe20(test_predictions, Y_labels_test)
 
-        print(f'MSE {mse} : MAPE {mape:.2f}% : MAE {mae} : R2 {r2:.4f} : Max error {max_error_amt} : PE20 {pe_20:.3f}')
+        print(f'MSE {mse:,.1f} : MAPE {mape:.2f}% : MAE {mae:,.2f} : R2 {r2:.4f} : Max error {max_error_amt:,.1f} : PE20 {pe_20:.3f}')
         print()
 
 
