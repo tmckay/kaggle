@@ -29,6 +29,7 @@ def main():
 
 
 def show_features():
+    """Prints all potential features names from data and the first row of data"""
     with open(_CONFIG['FEATURES_FILE']) as fh: 
         labels_reader = csv.DictReader(fh)
 
@@ -39,12 +40,14 @@ def show_features():
 
 
 def pe20(preds, labels):
+    """Generates a metric for the percent of predictions within 20% i.e. <=.20"""
     diff = np.abs(preds - labels) 
     error = diff / preds
     return np.count_nonzero(error < .20) / np.count_nonzero(error)
 
 
 def train():
+    """Trains a model, makes predictions and generates metrics"""
 
     features = ('YearBuilt', 'LotArea', '1stFlrSF', '2ndFlrSF', 'YearRemodAdd', 'OverallQual', 'OverallCond', 'TotalBsmtSF', 'SalePrice')
 
