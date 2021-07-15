@@ -1,5 +1,6 @@
 import argparse
 import csv
+import math
 import random
 
 import numpy as np
@@ -47,14 +48,15 @@ def pe20(preds, labels):
 
 
 def metrics(predictions, labels):
-    mse = mean_squared_error(predictions, labels)
+    rmse = math.sqrt(mean_squared_error(predictions, labels))
     mape = mean_absolute_percentage_error(predictions, labels) * 100
     mae = median_absolute_error(predictions, labels)
     r2 = r2_score(predictions, labels)
     max_error_amt = max_error(predictions, labels)
     pe_20 = pe20(predictions, labels)
 
-    print(f'MSE {mse:,.1f} : MAPE {mape:.2f}% : MAE {mae:,.2f} : R2 {r2:.4f} : Max error {max_error_amt:,.1f} : PE20 {pe_20:.3f}')
+    print(f'RMSE {rmse:,.1f} : MAPE {mape:.2f}% : MAE {mae:,.2f} : R2 {r2:.4f} '
+          f': Max error {max_error_amt:,.1f} : PE20 {pe_20:.3f}')
     print()
 
 
