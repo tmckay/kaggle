@@ -47,18 +47,23 @@ def pe20(preds, labels):
     return np.count_nonzero(error < .20) / np.count_nonzero(error)
 
 
-def metrics(predictions, labels):
-    rmse = math.sqrt(mean_squared_error(predictions, labels))
-    mape = mean_absolute_percentage_error(predictions, labels) * 100
-    mae = median_absolute_error(predictions, labels)
-    r2 = r2_score(predictions, labels)
-    max_error_amt = max_error(predictions, labels)
-    pe_20 = pe20(predictions, labels)
+def metrics_factory(predictions, labels):
+    holder = MetricsHolder()
+    holder.rmse = math.sqrt(mean_squared_error(predictions, labels))
+    holder.mape = mean_absolute_percentage_error(predictions, labels) * 100
+    holder.mae = median_absolute_error(predictions, labels)
+    holder.r2 = r2_score(predictions, labels)
+    holder.max_error_amt = max_error(predictions, labels)
+    holder.pe_20 = pe20(predictions, labels)
 
-    print(f'RMSE {rmse:,.1f} : MAPE {mape:.2f}% : MAE {mae:,.2f} : R2 {r2:.4f} '
-          f': Max error {max_error_amt:,.1f} : PE20 {pe_20:.3f}')
-    print()
+    return holder
 
+
+class MetricsHolder:
+    def __str__(self): 
+        rv = (f'RMSE {self.rmse:,.1f} : MAPE {self.mape:.2f}% : MAE {self.mae:,.2f} : R2 {self.r2:.4f} '
+              f': Max error {self.max_error_amt:,.1f} : PE20 {self.pe_20:.3f}')
+        return rv
 
 
 def train():
@@ -113,7 +118,8 @@ def train():
 
         test_predictions = regr.predict(X_feats_test)
 
-        metrics(test_predictions, Y_labels_test)
+        print(metrics_factory(test_predictions, Y_labels_test))
+        print()
 
 if __name__ == '__main__':
     main()
