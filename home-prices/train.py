@@ -60,6 +60,38 @@ def metrics_factory(predictions, labels):
 
 
 class MetricsHolder:
+    metrics = (
+        {
+            'acronym': 'RMSE',
+            'name': 'Root Mean Squared Error',
+            'value_format': ',.1f'
+        },
+        {
+            'acronym': 'MAPE',
+            'name': 'Mean Absolute Percentage Error',
+            'value_format': '.2f'
+        },
+        {
+            'acronym': 'MAE',
+            'name': 'Mean Absolute Error',
+            'value_format': ',.2f'
+        },
+        {
+            'acronym': 'R2',
+            'name': 'Coefficient of Determinant',
+            'value_format': '.2f'
+        },
+        {
+            'acronym': '',
+            'name': 'Max Error',
+            'value_format': ',.1f'
+        },
+        {
+            'acronym': 'PE20',
+            'name': 'Percent Error within 20%',
+            'value_format': '.3f'
+        }
+    )
     def __str__(self): 
         rv = (f'RMSE {self.rmse:,.1f} : MAPE {self.mape:.2f}% : MAE {self.mae:,.2f} : R2 {self.r2:.4f} '
               f': Max error {self.max_error_amt:,.1f} : PE20 {self.pe_20:.3f}')
