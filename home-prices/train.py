@@ -106,6 +106,7 @@ def train():
         'LotArea',
         '1stFlrSF',
         '2ndFlrSF',
+        'GrLivArea',
         'YearRemodAdd',
         'OverallQual',
         'OverallCond',
